@@ -19,7 +19,7 @@ public interface NoteRecordRepository extends JpaRepository<NoteRecord, Long> {
         + "n.courseName,"
         + "n.courseNote)"
         + "FROM NoteRecord n "
-        + "WHERE n.nameAndSurname = :nameAndSurname")
+        + "WHERE n.nameAndSurname like concat('%',:nameAndSurname,'%') ")
     List<NoteRecordDTO> getAllNameAndSurname(@Param("nameAndSurname") String nameAndSurname);
 
     @Query("SELECT "
