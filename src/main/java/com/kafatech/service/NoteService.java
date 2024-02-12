@@ -11,6 +11,6 @@ public interface NoteService {
     InfoMessage createNoteRecord(NoteRecordDTO noteRecordDTO);
     InfoMessage deleteNoteRecord(Long noteId);
 
-    InfoMessage detailNoteRecord(Long noteId);
+    NoteRecordDTO detailNoteRecord(Long noteId);
 
 }

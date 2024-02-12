@@ -1,5 +1,6 @@
 package com.kafatech.controller;
 
+import com.kafatech.models.request.GetAllRequest;
 import com.kafatech.models.response.InfoMessage;
 import com.kafatech.service.NoteService;
 import com.kafatech.service.dto.NoteRecordDTO;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping
+@CrossOrigin
 public class NoteController {
 
     private NoteService noteService;
@@ -19,12 +21,12 @@ public class NoteController {
     }
 
     @PostMapping("/getAll")
-    public ResponseEntity<List<NoteRecordDTO>> getAllNoteRecord(String nameAndSurname) {
-        return ResponseEntity.ok(noteService.getAllNoteRecord(nameAndSurname));
+    public ResponseEntity<List<NoteRecordDTO>> getAllNoteRecord(@RequestBody GetAllRequest getAllRequest) {
+        return ResponseEntity.ok(noteService.getAllNoteRecord(getAllRequest.getNameAndSurname()));
     }
 
     @PostMapping("/createNote")
-    public ResponseEntity<InfoMessage> createNoteRecord(NoteRecordDTO noteRecordDTO) {
+    public ResponseEntity<InfoMessage> createNoteRecord(@RequestBody NoteRecordDTO noteRecordDTO) {
         return ResponseEntity.ok(noteService.createNoteRecord(noteRecordDTO));
     }
 
@@ -34,7 +36,7 @@ public class NoteController {
     }
 
     @GetMapping("/getNote/{noteId}")
-    public ResponseEntity<InfoMessage> detailNoteRecord(@PathVariable Long noteId) {
+    public ResponseEntity<NoteRecordDTO> detailNoteRecord(@PathVariable Long noteId) {
         return ResponseEntity.ok(noteService.detailNoteRecord(noteId));
     }
 }
